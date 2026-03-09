@@ -8,16 +8,16 @@ pipeline {
             }
         }
 
-        stage('Build and Test') {
+        stage('Show Project Files') {
             steps {
-                sh 'docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app maven:3.9.9-eclipse-temurin-21 mvn clean test package'
+                sh 'ls -la'
             }
         }
-    }
 
-    post {
-        success {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+        stage('Show Java Version') {
+            steps {
+                sh 'java -version'
+            }
         }
     }
 }
