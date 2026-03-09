@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.9-eclipse-temurin-21'
-        }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
@@ -12,15 +8,9 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build and Test') {
             steps {
-                sh 'mvn clean package'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                sh 'docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app maven:3.9.9-eclipse-temurin-21 mvn clean test package'
             }
         }
     }
