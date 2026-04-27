@@ -8,15 +8,9 @@ pipeline {
             }
         }
 
-        stage('Show Project Files') {
+        stage('Show Files') {
             steps {
                 sh 'ls -la'
-            }
-        }
-
-        stage('Show Java Version') {
-            steps {
-                sh 'java -version'
             }
         }
     }
